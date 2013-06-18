@@ -21,7 +21,8 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 	
 	public void renderAModelAt(TileEntityGrave1 tileentity1, double d, double d1, double d2, float f){
 		
-
+		int meta = World.getBlockMetadata(x, y, z);
+		int start = 0;	
     
 		//
 		GL11.glPushMatrix();
