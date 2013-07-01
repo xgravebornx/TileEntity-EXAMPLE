@@ -23,7 +23,68 @@ public class Grave1Block extends BlockContainer{
 		//this.setBlockBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.9F); //min x y z max  x y z
 		}
 	
-	
+	/**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+public void onBlockAdded(World par1World, int par2, int par3, int par4)
+{
+     super.onBlockAdded(par1World, par2, par3, par4);
+     this.setDefaultDirection(par1World, par2, par3, par4);
+}
+/**
+     * set a blocks direction
+     */
+private void setDefaultDirection(World par1World, int par2, int par3, int par4)
+{
+     if (!par1World.isRemote)
+     {
+             int l = par1World.getBlockId(par2, par3, par4 - 1);
+             int i1 = par1World.getBlockId(par2, par3, par4 + 1);
+             int j1 = par1World.getBlockId(par2 - 1, par3, par4);
+             int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+             byte b0 = 3;
+             if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+             {
+                     b0 = 3;
+             }
+             if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+             {
+                     b0 = 2;
+             }
+             if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+             {
+                     b0 = 5;
+             }
+             if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+             {
+                     b0 = 4;
+             }
+             par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+     }
+}
+/**
+     * Called when the block is placed in the world.
+     */
+public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+{
+     int l = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+     if (l == 0)
+     {
+             par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
+     }
+     if (l == 1)
+     {
+             par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
+     }
+     if (l == 2)
+     {
+             par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
+     }
+     if (l == 3)
+     {
+             par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+            }
+}
 	
 
 	    public boolean isOpaqueCube() {
