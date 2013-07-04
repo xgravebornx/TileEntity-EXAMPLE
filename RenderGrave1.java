@@ -10,19 +10,50 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
   
-	
+
+
 public class RenderGrave1 extends TileEntitySpecialRenderer{
 	
 	public RenderGrave1(){
 		aModel = new ModelGrave1();
 	}
 	
-	public void renderAModelAt(TileEntityGrave1 tileentity1, double d, double d1, double d2, float f){
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
+        TileEntityGrave1 tileEntity = (TileEntityGrave1) te;
+		
+		   int meta;
+	        if (tileEntity.worldObj != null) {
+	            meta = tileEntity.getBlockMetadata();
+	        } else {
+	            meta = 0;
+	        }
 		
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.52F, (float)d2 + 0.5F);
-		GL11.glRotatef(180F, 0F, 0F, 1F);
-		bindTextureByName("/mods/cosmetica/textures/blocks/grave1.png");
+		GL11.glTranslatef((float)x + 0.5F, (float)y + 1.52F, (float)z + 0.5F);
+		
+
+
+		
+		  switch (getGrave1Direction(meta)) {
+          case 0:
+              GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
+              break;
+          case 1:
+              GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
+              break;
+          case 2:
+              GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+              break;
+          case 3:
+              GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
+              break;
+      }
+		
+		
+		
+		
+		GL11.glRotatef(180F, 1.0F, 0F, 1F);
+		bindTextureByName("/texture/path/here");
 		GL11.glPushMatrix();
 		aModel.renderAll(0.0625F);
 		GL11.glPopMatrix();
@@ -30,10 +61,22 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 	}
 
 	
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1,
-			double d2, float f) {
-		renderAModelAt((TileEntityGrave1)tileentity, d, d1, d2, f);
-	}
+	private static int getGrave1Direction(int meta) {
+        switch (meta) {
+            case 0: // S
+                return 0;
+            case 1: // N
+                return 2;
+            case 2: // E
+                return 3;
+            case 3: // W
+                return 1;
+            default:
+                return 2;
+        }
+    }
+
+
 		
 	private ModelGrave1 aModel;
 	
