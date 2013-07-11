@@ -1,6 +1,4 @@
-package mods.tutorial.common;
-
-
+package mods.cosmetica.common;
 
 import static net.minecraftforge.common.ForgeDirection.EAST;
 import static net.minecraftforge.common.ForgeDirection.NORTH;
@@ -64,30 +62,32 @@ private void setDefaultDirection(World par1World, int par2, int par3, int par4)
              par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
      }
 }
-/**
-     * Called when the block is placed in the world.
-     */
-public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
-{
-     int l = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-     if (l == 0)
-     {
-             par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-     }
-     if (l == 1)
-     {
-             par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-     }
-     if (l == 2)
-     {
-             par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-     }
-     if (l == 3)
-     {
-             par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
-            }
+@Override
+public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemStack) {
+    replaceGround(world, x, y - 1, z);
+
+    int direction = MathHelper.floor_float(player.rotationYaw);
+    if (direction < 0) {
+        direction = 360 + direction;
+    }
+
+    int metadata = getMetadataBasedOnRotation(direction);
+    world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+
 }
-	
+
+private static int getMetadataBasedOnRotation(int rotation) {
+    if (rotation >= 315 || rotation < 45) {
+        return 1;
+    } else if (rotation >= 45 && rotation < 135) {
+        return 2;
+    } else if (rotation >= 135 && rotation < 225) {
+        return 0;
+    } else {
+        return 3;
+    }
+}
+
 	public Grave1Block(int id, Material mat) {
 		super(id, mat);
 		
@@ -113,7 +113,28 @@ public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, Entit
 	    	return -1;
 	    }
 
-	    	    
+	    private static void replaceGround(World world, int x, int y, int z) {
+	        int botBlockID = world.getBlockId(x, y, z);
+	        if (botBlockID == 2 || botBlockID == 110) {
+	            world.setBlock(x, y, z, Block.dirt.blockID);
+	        }
+	    }
+	    
+	    public static int getMetaDirection(int direction) {
+	        switch (direction) {
+	            case 0: // S
+	                return 1;
+	            case 1: // W
+	                return 2;
+	            case 2: // N
+	                return 0;
+	            case 3: // E
+	                return 3;
+	            default:
+	                return 0;
+	        }
+	    }
+	    
 		@Override
 		public TileEntity createNewTileEntity(World world) {
 			
