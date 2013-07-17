@@ -1,4 +1,3 @@
-
 package mods.cosmetica.common;
 
 import org.lwjgl.opengl.GL11;
@@ -32,20 +31,21 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 
 
 		
-		  switch (getGrave1Direction(meta)) {
+	  switch (getGrave1Direction(meta)) {
           case 0:
-              GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
+              GL11.glRotatef(-180, 0.0F, 1.0F, 0.0F);
               break;
           case 1:
               GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
               break;
           case 2:
-              GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+              GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
               break;
           case 3:
-              GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
+              GL11.glRotatef(-90, 0.0F, 1.0F, 0.0F);
               break;
       }
+		
 		
 		
 		
