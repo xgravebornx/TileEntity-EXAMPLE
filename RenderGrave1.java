@@ -1,4 +1,4 @@
-package mods.yourmod.common;
+package mods.tutorial.common;
 
 import org.lwjgl.opengl.GL11;
 
