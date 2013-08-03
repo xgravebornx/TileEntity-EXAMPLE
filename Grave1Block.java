@@ -1,4 +1,4 @@
-package mods.cosmetica.common;
+package mods.tutorial.common;
 
 import static net.minecraftforge.common.ForgeDirection.EAST;
 import static net.minecraftforge.common.ForgeDirection.NORTH;
