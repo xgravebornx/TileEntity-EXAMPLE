@@ -1,4 +1,4 @@
-package mods.cosmetica.common;
+package mods.yourmod.common;
 
 import org.lwjgl.opengl.GL11;
 
@@ -31,7 +31,7 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 
 
 		
-	  switch (getGrave1Direction(meta)) {
+		  switch (getmetaDirection(meta)) {
           case 0:
               GL11.glRotatef(-180, 0.0F, 1.0F, 0.0F);
               break;
@@ -49,7 +49,6 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 		
 		
 		
-		
 		GL11.glRotatef(180F, 0F, 0F, 1F);
 		bindTextureByName("/mods/cosmetica/textures/blocks/grave1.png");
 		GL11.glPushMatrix();
@@ -59,7 +58,7 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 	}
 
 	
-	private static int getGrave1Direction(int meta) {
+	private static int getmetaDirection(int meta) {
         switch (meta) {
             case 0: // S
                 return 0;
