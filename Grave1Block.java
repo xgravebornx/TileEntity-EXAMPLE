@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 public class Grave1Block extends BlockContainer{
 
-	/**
+/**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
 public void onBlockAdded(World par1World, int par2, int par3, int par4)
@@ -122,17 +122,18 @@ private static int getMetadataBasedOnRotation(int rotation) {
 	    
 	    public static int getMetaDirection(int direction) {
 	        switch (direction) {
-	            case 0: // S
-	                return 1;
-	            case 1: // W
+	          case 0: // S
+	                return 0;
+	            case 1: // N
 	                return 2;
-	            case 2: // N
-	                return 0;
-	            case 3: // E
+	            case 2: // E
 	                return 3;
+	            case 3: // W
+	                return 1;
 	            default:
-	                return 0;
+	                return 2;
 	        }
+	    
 	    }
 	    
 		@Override
@@ -143,5 +144,4 @@ private static int getMetadataBasedOnRotation(int rotation) {
 
 		
 }
-
 
