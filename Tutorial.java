@@ -17,7 +17,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class Tutorial {
-  public static Block grave1 = new Grave1Block(1000, Material.wood).setUnlocalizedName("tutorial:graveone").setCreativeTab(CreativeTabs.tabBlock);
+	public static Block grave1 = new Grave1Block(679, Material.stone).func_111022_d("cosmetica:graveone").setUnlocalizedName("Grave 1");
 	
 	
 	
