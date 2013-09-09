@@ -1,4 +1,4 @@
-package mods.tutorial.common;
+package mods.cosmetica.common;
 
 import org.lwjgl.opengl.GL11;
 
@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class RenderGrave1 extends TileEntitySpecialRenderer{
@@ -50,7 +51,7 @@ public class RenderGrave1 extends TileEntitySpecialRenderer{
 		
 		
 		GL11.glRotatef(180F, 0F, 0F, 1F);
-		bindTextureByName("/mods/cosmetica/textures/blocks/grave1.png");
+		func_110628_a(new ResourceLocation("cosmetica:textures/models/grave1.png"));
 		GL11.glPushMatrix();
 		aModel.renderAll(0.0625F);
 		GL11.glPopMatrix();
